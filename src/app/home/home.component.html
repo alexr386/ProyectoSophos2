@@ -1,1 +1,183 @@
-<p>home works!</p>
+<div class="container" style="text-align: center" style="margin-top: 50px">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Ingresaste a la APP Banking - {{user.name + " " + user.second_name}}
+                <img width="155" alt="Logo banking" src="https://www.mcicon.com/wp-content/uploads/2020/12/Business_Finance_Bank_1-copy-23.jpg"/>
+            </h1>
+            <hr>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button  (click)="logout()" class="btn btn-danger"style="margin-left: 10px">Cerrar sesión</button>
+        </div>
+    </div>
+    <div class="row" **ngIf="login">
+        <div class="col-md-6">
+            <div class="spinner-border tex-info float-right" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Clientes <button class="btn btn-success btn-md" (click)="agregar()">Nuevo</button>
+                <button (click)="Listar()" class = "btn btn-info" style="margin-left: 10px">Listar clientes</button>
+            </h2>
+            
+        </div>
+    </div>
+    <form (ngSubmit)="crearClient()" id="crear" *ngIf="crear">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >TIPO DOCUMENTO</label>
+                <input type="text" [(ngModel)]="client.type_id" [ngModelOptions]="{standalone:true}" placeholder="Tipo de ID" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >NÚMERO DE DOCUMENTO</label>
+                <input type="text" [(ngModel)]="client.num_id" [ngModelOptions]="{standalone:true}" placeholder="Numero de ID" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >NOMBRE(S)</label>
+                <input type="text" [(ngModel)]="client.f_name" [ngModelOptions]="{standalone:true}" placeholder="Nombre(s)" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >APELLIDO(S)</label>
+                <input type="text" [(ngModel)]="client.s_name" [ngModelOptions]="{standalone:true}" placeholder="Apellido(s)" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >EMAIL</label>
+                <input type="email" [(ngModel)]="client.correo_client" [ngModelOptions]="{standalone:true}" placeholder="Email" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" >FECHA DE NACIMIENTO</label>
+                <input type="text" [(ngModel)]="client.date_born" [ngModelOptions]="{standalone:true}" placeholder="AAAA-MM-DD" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Agregar cuenta ahorros al cliente</h4>  <button class="btn btn-warning btn-sm" (click)="agregarSavingAccou()">Agregar</button>                 
+            </div>
+        </div>
+        <br>
+        <div  *ngFor="let savingAccou of client.saving_accouList">
+            <div class="row">
+                <div class="row" class="col-md-6">
+                    <label for="" >NÚMERO DE CUENTA AHORROS</label>
+                    <input type="text" [(ngModel)]="savingAccou.num_saving_accou" [ngModelOptions]="{standalone:true}" placeholder="Número cuenta" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >TIPO DE CUENTA AHORROS</label>
+                    <input type="text" [(ngModel)]="savingAccou.type_saving_accou" [ngModelOptions]="{standalone:true}" placeholder="Tipo cuenta" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >FECHA DE APERTURA</label>
+                    <input type="text" [(ngModel)]="savingAccou.open_date_saving" [ngModelOptions]="{standalone:true}" placeholder="AAAA-MM-DD" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >ESTATUS DE LA CUENTA</label>
+                    <input type="text" [(ngModel)]="savingAccou.status_saving_accou" [ngModelOptions]="{standalone:true}" placeholder="Estatus" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >MONTO DE LA CUENTA</label>
+                    <input type="text" [(ngModel)]="savingAccou.balance_saving_accou" [ngModelOptions]="{standalone:true}" placeholder="Monto" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarSavingAccou(savingAccou)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Agregar cuenta corriente al cliente</h4>  <button class="btn btn-warning btn-sm" (click)="agregarCheckingAccou()">Agregar</button>                 
+            </div>
+        </div>
+        <br>
+        <div  *ngFor="let checkingAccou of client.checking_accouList">
+            <div class="row">
+                <div class="row" class="col-md-6">
+                    <label for="" >NÚMERO DE CUENTA CORRIENTE</label>
+                    <input type="text" [(ngModel)]="checkingAccou.num_checking_accou" [ngModelOptions]="{standalone:true}" placeholder="Número cuenta" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >TIPO DE CUENTA CORRIENTE</label>
+                    <input type="text" [(ngModel)]="checkingAccou.type_checking_accou" [ngModelOptions]="{standalone:true}" placeholder="Tipo cuenta" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >FECHA DE APERTURA</label>
+                    <input type="text" [(ngModel)]="checkingAccou.open_date_checking" [ngModelOptions]="{standalone:true}" placeholder="AAAA-MM-DD" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >ESTATUS DE LA CUENTA</label>
+                    <input type="text" [(ngModel)]="checkingAccou.status_checking_accou" [ngModelOptions]="{standalone:true}" placeholder="Estatus" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="" >MONTO DE LA CUENTA</label>
+                    <input type="text" [(ngModel)]="checkingAccou.balance_checking_accou" [ngModelOptions]="{standalone:true}" placeholder="Monto" class="form-control" required>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-6">
+                <button class="btn btn-danger btn-sm" (click)="borrarCheckingAccou(checkingAccou)">Borrar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-success float-left" value="Crear cliente">
+            </div>
+        </div>        
+        <br>
+        <br>
+    </form>
+    <br>
+</div>
+    

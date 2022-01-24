@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AddComponent implements OnInit {
 
   user:any={};
   clients:any =[];
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit {
   crear:boolean = false;
   loading:boolean = false;
 
-  constructor(private http: HttpClient,private router:Router) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
     this.user = JSON.stringify(localStorage.getItem('user'));
@@ -27,18 +26,9 @@ export class HomeComponent implements OnInit {
       location.href ='/';
     }
     else{
-      this.client = {correoClient:this.client.correoClient,saving_accouList:[],checking_accouList:[]};
+      this.client = {correoClient:this.client.correo_client,saving_accouList:[],checking_accouList:[]};
       this.buscarClients();
     }
-  }
-
-  logout(){
-    localStorage.removeItem("user");
-    alert("Sesión cerrada exitosamente");
-    location.href ='/';
-  }
-  Listar(){
-    this.router.navigate(["listar"]);
   }
   buscarClients(){
     this.loading = true;
@@ -47,7 +37,9 @@ export class HomeComponent implements OnInit {
     );
   }
   buscarClientsService():Observable<any>{
-    return this.http.get<any>("http://localhost:3030/clients01/buscar");
+    return this.http.get<any>("http://localhost:3030/clients01/buscar/correo_user/" + this.user.correo_user).pipe(
+      catchError(e=>"Error")
+    )
   }
   llenarClients(clients:any){
     this.clients = clients;
@@ -56,7 +48,9 @@ export class HomeComponent implements OnInit {
   agregar(){
     this.crear =!this.crear;
   }
-  
+  Listar(){
+    this.router.navigate(["listar"]);
+  }
   crearClient(){
     let formulario:any = document.getElementById("crear");
     let formularioValido:boolean = formulario.reportValidity();
@@ -76,25 +70,12 @@ export class HomeComponent implements OnInit {
     return this.http.post<any>("http://localhost:3030/clients01/guardar",this.client,httpOptions);
   }
   finalizarCrearClient(contacto:any){
-    if(contacto){
+    if(this.client){
       alert("Cliente creado exitosamente.");  
     }
-    this.client = {clientCorreo:this.client.correo_client,saving_accouList:[],checking_accouList:[]};
+    this.client = {clientCorreo:this.client,saving_accouList:[],checking_accouList:[]};
     this.crear = false;
     this.buscarClients();
   }
-  agregarSavingAccou(){
-    this.client.saving_accouList.push({});
-  }
-  borrarSavingAccou(saving_accou:any){
-    this.client.saving_accouList.splice(this.client.saving_accouList.indexof(saving_accou),1);
-  }
-  agregarCheckingAccou(){
-    this.client.checking_accouList.push({});
-  }
-  borrarCheckingAccou(checking_accou:any){
-    this.client.checking_accouList.splice(this.client.checking_accouList.indexof(checking_accou),1);
-  }
+
 }
-
-

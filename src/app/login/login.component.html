@@ -4,10 +4,11 @@
             <h1>Bienvenido a la APP Banking - Users 
                 <img width="265" alt="Logo banking" src="https://www.mcicon.com/wp-content/uploads/2020/12/Business_Finance_Bank_1-copy-23.jpg"/>
             </h1>
-            
+            <hr>
+            <br>
         </div>
         <div class="col-md-6">
-            <hr>
+            
         </div>
     </div>
     <div class="row" **ngIf="login">
@@ -22,7 +23,7 @@
     <form (ngSubmit)="login()" id="login">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" [(ngModel)]="user.correoUser" [ngModelOptions]="{standalone:true}" placeholder="Correo usuario" class="form-control" required>
+                <input type="email" [(ngModel)]="user.correo_user" [ngModelOptions]="{standalone:true}" placeholder="Correo usuario" class="form-control" required>
             </div>
         </div>
             <br>
@@ -34,17 +35,17 @@
             <br>
             <div class="row">
                 <div class="col-md-6">
-                    <input class="btn-btn-success float-left" type="submit" value="Ingresar"/>
+                    <input class="btn btn-danger float-left" type="submit" value="Ingresar"/>
                 </div>
             </div>
     </form>
     <br>
-    <div class="row" **ngIf="errorInicio">
-        <label class="float-left" style="color:red">Usuario o password incorrecto</label>
+    <div class="row" *ngIf="errorInicio">
+        <label class="float-left" class="col-md-6" style="color:red">Usuario o password incorrecto</label>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <label class="float-left">Si no tienes cuenta con nosotros haz click aqui <a href="#"(click)="crearCuenta()">Aquí</a></label>
+            <label class="float-left">Si no tienes cuenta de usuario has click <a href="#"(click)="crearCuenta()">aquí</a></label>
         </div>
     </div>
             

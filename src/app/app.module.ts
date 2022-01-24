@@ -8,13 +8,24 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { FormsModule } from '@angular/forms';
 import{ HttpClientModule } from '@angular/common/http';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { ListarComponent } from './listar/listar.component';
+import { ServiceService } from './Service/service.service';
+import { ShowProductsComponent } from './show-products/show-products.component';
+import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    SigninComponent
+    SigninComponent,
+    HomeAdminComponent,
+    ListarComponent,
+    ShowProductsComponent,
+    AddComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +33,7 @@ import{ HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

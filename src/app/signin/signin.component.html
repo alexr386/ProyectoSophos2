@@ -1,17 +1,17 @@
-<p>signin works!</p>
 <div class="container" style="text-align: center">
     <div class="row">
         <div class="col-md-12">
-            <h1>Crea tu cuenta ahora 
+            <h1>Crea tu cuenta de usuario - APP Banking
                 <img width="265" alt="Logo banking" src="https://www.mcicon.com/wp-content/uploads/2020/12/Business_Finance_Bank_1-copy-23.jpg"/>
             </h1>
-            
+            <hr>
+            <br>
         </div>
         <div class="col-md-6">
-            <hr>
+ 
         </div>
     </div>
-    <div class="row" **ngIf="login">
+    <div class="row" **ngIf="loading">
         <div class="col-md-6">
             <div class="spinner-border tex-info float-right" role="status">
                 <span class="sr-only">Loading...</span>
@@ -23,19 +23,19 @@
     <form (ngSubmit)="crear()" id="crear">
         <div class="row">
             <div class="col-md-6">
-                <input type="email" [(ngModel)]="user.correoUser" [ngModelOptions]="{standalone:true}" placeholder="Correo usuario" class="form-control" required>
+                <input type="email" [(ngModel)]="user.correo_user" [ngModelOptions]="{standalone:true}" placeholder="Correo usuario" class="form-control" required>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-6">
-                <input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone:true}" placeholder="Nombres" class="form-control" required>
+                <input type="text" [(ngModel)]="user.name" [ngModelOptions]="{standalone:true}" placeholder="Nombre(s)" class="form-control" required>
             </div>
         </div>
         <br>    
         <div class="row">
             <div class="col-md-6">
-                <input type="text" [(ngModel)]="user.second_name" [ngModelOptions]="{standalone:true}" placeholder="Apellidos" class="form-control" required>
+                <input type="text" [(ngModel)]="user.second_name" [ngModelOptions]="{standalone:true}" placeholder="Apellido(s)" class="form-control" required>
             </div>
         </div>
         <br> 
@@ -47,17 +47,17 @@
         <br>
         <div class="row">
             <div class="col-md-6">
-                <input class="btn-btn-success float-left" type="submit" value="Crear"/>
+                <input class="btn btn-danger float-left" type="submit" value="Crear"/>
             </div>
         </div>
     </form>
     <br>
-    
     <div class="row">
         <div class="col-md-6">
             <label class="float-left"><a href="#"(click)="regresar()">Regresar</a></label>
         </div>
     </div>
-            
+    <br>
+    <br>    
 </div>
 
